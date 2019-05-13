@@ -1,7 +1,6 @@
 #%%stage
 import pandas as pd  
 import numpy as np 
-from scipy import stats
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import LeaveOneOut
 from sklearn.model_selection import KFold
