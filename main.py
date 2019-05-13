@@ -37,6 +37,7 @@ def kfold_errorratio(data):
     y = data[:, 4]
 
     error = 0
+    total_error = 0
     for train_index, test_index in kfold.split(X):
         X_train, X_test = X[train_index], X[test_index]
         y_train, y_test = y[train_index], y[test_index]
@@ -44,8 +45,11 @@ def kfold_errorratio(data):
         for i, test_data in enumerate(X_test):
           if (count_error(X_train, [test_data.tolist()], y_train, y_test[i])):
             error += 1
-        
-    print('Error with KFOLD : ', (error / len(data)) * 100, '%')
+
+        total_error += (error / len(X_test)) * 100
+        error = 0
+
+    print('Error with KFOLD : ', (total_error / kfold.get_n_splits()), '%')
 
 iris_data = np.array(pd.read_csv('iris.csv'))
 
